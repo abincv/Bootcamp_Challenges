@@ -78,7 +78,7 @@ actor {
         for (value in array.vals()){
             if(value != n)
             {
-                new_array := Array.append(new_array,[value])
+                new_array := Array.append<Nat>(new_array,[value])
             };
         };
 
