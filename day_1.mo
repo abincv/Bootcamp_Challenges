@@ -1,4 +1,5 @@
 import Array "mo:base/Array";
+import Iter "mo:base/Iter";
 
 
 actor {
@@ -91,11 +92,11 @@ actor {
     private func _swap(array : [Nat], i : Nat, j : Nat) : [Nat] {
         // Transform our immutable array into a mutable one so we can modify values.
         let array_mutable = Array.thaw<Nat>(array);
-        let tmp = array[i];
-        array[i] := array[j];
-        array[j] := tmp;
+        let tmp = array_mutable[i];
+        array_mutable[i] := array_mutable[j];
+        array_mutable[j] := tmp;
         // Transform our mutable array into an immutable array.
-        return(Array.freeze<Nat>(array));
+        return(Array.freeze<Nat>(array_mutable));
     };
 
     public func selection_sort(array : [Nat]) : async [Nat] {
@@ -118,16 +119,15 @@ actor {
     // Note : This _swap function that swap index i and j of a mutable array is not something I would recommend. If you are defining an array as immutable you shouldn't touch the values inside after the declaration.
     // Also Motoko has a sort function in the Array library. Challenge 10 was mostly for educational purposes around sorting algorithm.
 
-};
-
-
-    
-
-
-
-
-
-    
-    
-
 }
+
+
+    
+
+
+
+
+
+    
+    
+
