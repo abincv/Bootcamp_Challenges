@@ -1,4 +1,6 @@
 import Nat8 "mo:base/Nat8";
+import Array "mo:base/Array";
+import Iter "mo:base/Iter";
 import Nat "mo:base/Nat";
 import Char "mo:base/Char";
 import Text "mo:base/Text";
@@ -106,7 +108,31 @@ actor {
         
     };
 
+    // Challenge 10 
+    func swap(array : [Nat], i : Nat, j : Nat) : [Nat] {
+        let mutable_array = Array.thaw<Nat>(array);
+        let tmp = mutable_array[i];
+        mutable_array[i] := mutable_array[j];
+        mutable_array[j] := tmp;
+        return(Array.freeze<Nat>(mutable_array))
+    };
+
+    public func bubble_sort(array : [Nat]) : async [Nat] {
+        var sorted = array;
+        let size = array.size();
+        for(i in Iter.range(0, size - 1)){
+            for (j in Iter.range(0, size - 1 - i)){
+                if(sorted[i] > sorted[i + 1]){
+                    sorted := swap(sorted, i , j);
+                };
+            };
+        };
+        return (sorted)
+    };
+
 }
+
+
     
 
 
