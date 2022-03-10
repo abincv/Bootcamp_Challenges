@@ -1,4 +1,7 @@
 import Array "mo:base/Array";
+import Nat "mo:base/Nat";
+import Char "mo:base/Char";
+
 module {
 
 
@@ -6,7 +9,7 @@ module {
   private func swap(array : [Nat], i : Nat, j : Nat) : [Nat] {
       let mutable_array = Array.thaw<Nat>(array); 
       mutable_array[i] :=  array[j];
-      mutable_array[j] :=  array[i]
+      mutable_array[j] :=  array[i];
       return(Array.freeze<Nat>(mutable_array));
   };
 
@@ -15,7 +18,7 @@ module {
       let mut = Array.init<Nat>(n, 0);
       var counter = 0;
       for(value in mut.vals()){
-        array[i] := counter;
+        mut[counter] := counter;
         counter += 1;
       };
       return(Array.freeze<Nat>(mut));
@@ -37,7 +40,7 @@ module {
   };
 
   //  Challenge 4 
-  public func nat_opt_to_nat(n : Nat?, m : Nat) : async Nat {
+  public func nat_opt_to_nat(n : ?Nat, m : Nat) : async Nat {
     switch(n){
       case(null) return m;
       case(?n) return n; 
@@ -46,14 +49,14 @@ module {
 
   //  Challenge 5
   public func day_of_the_week(day : Nat) : async ?Text {  
-    switch(n){
-      case(1) return "Monday";
-      case(2) return "Thursday";
-      case(3) return "Wednesday";
-      case(4) return "Tuesday";
-      case(5) return "Friday";
-      case(6) return "Saturday";
-      case(7) return "Sunday";
+    switch(day){
+      case(1) return ?"Monday";
+      case(2) return ?"Thursday";
+      case(3) return ?"Wednesday";
+      case(4) return ?"Tuesday";
+      case(5) return ?"Friday";
+      case(6) return ?"Saturday";
+      case(7) return ?"Sunday";
       case(_) return null;
     };
   };
