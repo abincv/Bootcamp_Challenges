@@ -103,7 +103,7 @@ actor {
 
     // Challenge 9
     public func size_in_bytes(t : Text ) : async Nat {
-        return (Text.encodeUtf8(t)).size();
+        return Blob.toArray(Text.encodeUtf8(t)).size();
 
         
     };
